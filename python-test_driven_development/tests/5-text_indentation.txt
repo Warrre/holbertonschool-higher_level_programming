@@ -1,0 +1,83 @@
+The ``5-text_indentation.py`` module
+==============================
+
+Using ``text_indentation`` 
+----------------------
+
+Import function from module:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Test normal cases:
+    >>> text_indentation("Hello. How are you? Fine: thanks.")
+    Hello.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
+    Fine:
+    <BLANKLINE>
+    thanks.
+    <BLANKLINE>
+
+Test empty string:
+    >>> text_indentation("")
+
+Test single characters:
+    >>> text_indentation(".")
+    .
+    <BLANKLINE>
+
+Test consecutive delimiters:
+    >>> text_indentation("Hello.. Hi")
+    Hello.
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    Hi
+
+Test spaces:
+    >>> text_indentation("   Hello   ")
+    Hello
+
+Test no special characters:
+    >>> text_indentation("Hello")
+    Hello
+
+Test invalid input:
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test all delimiters:
+    >>> text_indentation("First. Second? Third:")
+    First.
+    <BLANKLINE>
+    Second?
+    <BLANKLINE>
+    Third:
+    <BLANKLINE>
+
+Test multiple spaces between words:
+    >>> text_indentation("Hello    world.    New    line")
+    Hello    world.
+    <BLANKLINE>
+    New    line
+
+Test multiple spaces between delimiters:
+    >>> text_indentation("Hello.    World.    New.    Line")
+    Hello.
+    <BLANKLINE>
+    World.
+    <BLANKLINE>
+    New.
+    <BLANKLINE>
+    Line
+
+Test multiple spaces between words and delimiters:
+    >>> text_indentation("Hello    world.    New    line")
+    Hello    world.
+    <BLANKLINE>
+    New    line
