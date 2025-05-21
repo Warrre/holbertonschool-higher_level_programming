@@ -1,16 +1,13 @@
 #!/usr/bin/python3
-"""
-Classe Square qui définit un carré par sa taille (size)
-"""
-class Square:
-    """
-    Classe représentant un carré
-    """
-    def __init__(self, size):
-        """
-        Constructeur de la classe Square
+"""Module qui définit une classe Square."""
 
-        Arguments :
-        size -- la taille du carré (non vérifiée ici)
+
+class Square:
+    """Classe qui définit un carré."""
+
+    def __init__(self, size):
+        """Initialisation d'une nouvelle instance de Square.
+        Args:
+            size: La taille du côté du carré (pas encore vérifiée ici).
         """
         self.__size = size
