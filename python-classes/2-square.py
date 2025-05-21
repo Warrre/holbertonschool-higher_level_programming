@@ -1,25 +1,23 @@
 #!/usr/bin/python3
-"""
-Classe Square qui définit un carré avec validation de size
-"""
+"""Définit une classe Square avec validation de la taille."""
+
+
 class Square:
-    """
-    Classe représentant un carré
-    """
+    """Classe qui représente un carré."""
+
     def __init__(self, size=0):
         """
-        Constructeur de la classe Square
+        Initialise un nouvel objet Square.
 
-        Argument :
-        size (int, optionnel) : la taille du carré, par défaut 0
+        Paramètre :
+        size (int) : la taille du carré (doit être >= 0)
 
         Exceptions :
         - TypeError : si size n'est pas un entier
-        - ValueError : si size est négatif
+        - ValueError : si size est < 0
         """
         if not isinstance(size, int):
             raise TypeError("size must be an integer")
         if size < 0:
             raise ValueError("size must be >= 0")
-
         self.__size = size
