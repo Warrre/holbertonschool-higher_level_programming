@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""definition d'une classe vide rectangle"""
+"""Defines an empty Rectangle class."""
 
 
 class Rectangle:
-    """classe vide qui definit un rectangle"""
+    """An empty Rectangle class."""
     pass
