@@ -1,4 +1,7 @@
-#!/usr/bin/python3d
-def lookup(obj):
-    """Retourne la liste des attributs et méthodes disponibles de obj."""
+#!/usr/bin/python3
+
+
+
+def lookup(obj):    
+    """Returns the list of available attributes and methods of an object."""
     return dir(obj)
