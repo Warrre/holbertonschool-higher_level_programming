@@ -1,24 +1,43 @@
 #!/usr/bin/python3
-"""Module to list all states from a database"""
+"""
+Script qui affiche tous les états commençant par 'N' d'une base de données.
 
+Ce module se connecte à une base de données MySQL et récupère tous les états
+dont le nom commence par la lettre 'N', en les triant par ID.
+"""
 import MySQLdb
 import sys
 
+
 if __name__ == "__main__":
+    # Récupération des arguments de la ligne de commande
+    username = sys.argv[1]  # Nom d'utilisateur MySQL
+    password = sys.argv[2]  # Mot de passe MySQL
+    db_name = sys.argv[3]   # Nom de la base de données
+
+    # Établissement de la connexion à la base de données
     db = MySQLdb.connect(
-        host="localhost",
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306
+        host="localhost",      # Adresse du serveur MySQL
+        port=3306,             # Port par défaut
+        user=username,
+        passwd=password,
+        db=db_name
     )
 
+    # Création du curseur et exécution de la requête
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-    rows = cursor.fetchall()
+    cursor.execute("""
+        SELECT *
+        FROM states
+        WHERE BINARY name LIKE 'N%'
+        ORDER BY id ASC
+    """)
 
-    for row in rows:
+    # Récupération et affichage des résultats
+    results = cursor.fetchall()
+    for row in results:
         print(row)
 
+    # Fermeture des ressources
     cursor.close()
     db.close()
