@@ -1,35 +1,31 @@
 #!/usr/bin/python3
 """
-Script qui recherche un État par son nom dans la base de données.
+10-model_state_my_get
+that lists all State objects
+from the database hbtn_0e_6_usa
+where name matches the argument
+and is ordered by id (ascending)
+If no state matches the query, it prints "Not found"
 """
-import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+import sys
 
 if __name__ == "__main__":
-    # Récupération des arguments, y compris le nom d'état à rechercher
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-    state_name = sys.argv[4]  # Nom de l'état à rechercher
-
-    # Établissement de la connexion à la base de données
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        username, password, db_name), pool_pre_ping=True)
-
-    # Création de la session
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'.format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True
+    )
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    # Recherche de l'état par son nom exact
-    state = session.query(State).filter(State.name == state_name).first()
-
-    # Affichage du résultat
-    if state:
-        print("{}".format(state.id))
-    else:
+    name_search = sys.argv[4]
+    state = session.query(State).filter(State.name == name_search).first()
+    if state is None:
         print("Not found")
-
-    # Fermeture de la session
+    else:
+        print("{}".format(state.id))
     session.close()

@@ -1,33 +1,29 @@
 #!/usr/bin/python3
 """
-Script qui change le nom d'un State dans la base de données.
+12-model_state_update_id_2
+that changes the name of the State
+object with id = 2 to "New Mexico"
+in the database hbtn_0e_6_usa
+If the table is empty, it prints "Nothing"
+If the state with id = 2 does not exist, it does nothing
 """
-import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+import sys
+
 
 if __name__ == "__main__":
-    # Récupération des arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-
-    # Établissement de la connexion à la base de données
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        username, password, db_name), pool_pre_ping=True)
-
-    # Création de la session
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'.format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True
+    )
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    # Recherche de l'état avec id=2
-    state_to_update = session.query(State).filter(State.id == 2).first()
-
-    # Modification du nom de l'état
-    if state_to_update:
-        state_to_update.name = "New Mexico"
+    state = session.query(State).where(State.id == 2).first()
+    if state is not None:
+        state.name = "New Mexico"
         session.commit()
-
-    # Fermeture de la session
-    session.close()

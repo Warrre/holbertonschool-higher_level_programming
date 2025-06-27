@@ -1,34 +1,29 @@
 #!/usr/bin/python3
 """
-Script qui ajoute l'état "Louisiana" à la base de données.
+11-model_state_insert
+that adds the State object "Louisiana"
+to the database hbtn_0e_6_usa
+and prints the new state's id
+If the table is empty, it prints "Nothing"
 """
-import sys
+from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+import sys
+
 
 if __name__ == "__main__":
-    # Récupération des arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-
-    # Établissement de la connexion à la base de données
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        username, password, db_name), pool_pre_ping=True)
-
-    # Création de la session
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'.format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True
+    )
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    # Création et ajout du nouvel état
     new_state = State(name="Louisiana")
     session.add(new_state)
     session.commit()
-
-    # Affichage de l'ID du nouvel état
-    print("{}".format(new_state.id))
-
-    # Fermeture de la session
+    print(new_state.id)
     session.close()
-    
