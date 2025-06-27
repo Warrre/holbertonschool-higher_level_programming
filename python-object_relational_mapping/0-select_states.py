@@ -1,22 +1,38 @@
 #!/usr/bin/python3
 """
-that lists all states from the
-database hbtn_0e_0_usa
+Script qui liste tous les états d'une base de données.
+
+Ce module se connecte à une base de données MySQL et récupère tous les états
+enregistrés, en les triant par ID.
 """
 import MySQLdb
 import sys
 
+
 if __name__ == "__main__":
-    db_connection = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+    # Récupération des arguments de la ligne de commande
+    username = sys.argv[1]  # Nom d'utilisateur MySQL
+    password = sys.argv[2]  # Mot de passe MySQL
+    db_name = sys.argv[3]   # Nom de la base de données
+
+    # Établissement de la connexion à la base de données
+    db = MySQLdb.connect(
+        host="localhost",      # Adresse du serveur MySQL
+        port=3306,             # Port par défaut
+        user=username,
+        passwd=password,
+        db=db_name
     )
-    cursor = db_connection.cursor()
-    cursor.execute("SELECT * FROM states ORDER BY id ASC;")
-    for row in cursor.fetchall():
+
+    # Création du curseur et exécution de la requête
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
+
+    # Récupération et affichage des résultats
+    results = cursor.fetchall()
+    for row in results:
         print(row)
+
+    # Fermeture des ressources
     cursor.close()
-    db_connection.close()
+    
