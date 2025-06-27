@@ -1,46 +1,27 @@
 #!/usr/bin/python3
 """
-Script that takes the name of a state as an argument and lists all cities
-of that state, using the database hbtn_0e_4_usa.
+5-filter_cities
+that lists all cities from the
+database hbtn_0e_4_usa
 """
 import MySQLdb
 import sys
 
 
 if __name__ == "__main__":
-    # Récupération des arguments de la ligne de commande
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-    search_name = sys.argv[4]
-
-    # Connexion à la base de données MySQL
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=username,
-        passwd=password,
-        db=db_name
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
-
-    # Création du curseur et exécution de la requête SQL
+    name_search = sys.argv[4]
     cursor = db.cursor()
-
-    # Utilisation de paramètres pour éviter les injections SQL
-    query = """
-        SELECT cities.name
-        FROM cities
-        JOIN states ON cities.state_id = states.id
-        WHERE states.name = %s
-        ORDER BY cities.id ASC
-    """
-    cursor.execute(query, (search_name,))
-
-    # Récupération et formatage des résultats
-    results = cursor.fetchall()
-    cities = [row[0] for row in results]
-    print(", ".join(cities))
-
-    # Fermeture des ressources
+    query = "SELECT cities.name FROM cities JOIN states ON cities.state_id" \
+            "= states.id WHERE states.name = %s ORDER BY cities.id;"
+    cursor.execute(query, (name_search,))
+    rows = cursor.fetchall()
+    print(", ".join([row[0] for row in rows]))
     cursor.close()
     db.close()

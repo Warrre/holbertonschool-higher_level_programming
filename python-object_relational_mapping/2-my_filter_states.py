@@ -1,38 +1,31 @@
 #!/usr/bin/python3
 """
-Script qui filtre les états d'une base de données par nom.
+1-filter_states
+that lists all states from the
+database hbtn_0e_0_usa
+where name starts with 'n'
+and is ordered by id (ascending)
 """
 import MySQLdb
 import sys
 
 
 if __name__ == "__main__":
-    # Récupération des arguments de la ligne de commande
-    username = sys.argv[1]     # Nom d'utilisateur MySQL
-    password = sys.argv[2]     # Mot de passe MySQL
-    db_name = sys.argv[3]      # Nom de la base de données
-    search_name = sys.argv[4]  # Nom d'état à rechercher
-
-    # Établissement de la connexion à la base de données
-    db = MySQLdb.connect(
-        host="localhost",      # Adresse du serveur MySQL
-        port=3306,             # Port par défaut
-        user=username,
-        passwd=password,
-        db=db_name
+    db_connection = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
-
-    # Création du curseur et exécution de la requête
-    cursor = db.cursor()
-    query = "SELECT * FROM states" \
-            " WHERE BINARY name = '{}' ORDER BY id ASC".format(search_name)
+    name_search = sys.argv[4]
+    cursor = db_connection.cursor()
+    query = (
+        "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id"
+        .format(name_search))
     cursor.execute(query)
-
-    # Récupération et affichage des résultats
-    results = cursor.fetchall()
-    for row in results:
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
-
-    # Fermeture des ressources
     cursor.close()
-    db.close()
+    db_connection.close()

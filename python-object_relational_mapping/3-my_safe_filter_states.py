@@ -1,40 +1,27 @@
 #!/usr/bin/python3
 """
-Script qui filtre les états d'une base de données par nom de manière sécurisée.
+1-filter_states
+that lists all states from the
+database hbtn_0e_0_usa
 """
 import MySQLdb
 import sys
 
 
 if __name__ == "__main__":
-    # Récupération des arguments de la ligne de commande
-    username = sys.argv[1]     # Nom d'utilisateur MySQL
-    password = sys.argv[2]     # Mot de passe MySQL
-    db_name = sys.argv[3]      # Nom de la base de données
-    search_name = sys.argv[4]  # Nom d'état à rechercher
-
-    # Connexion à la base de données MySQL
     db = MySQLdb.connect(
-        host="localhost",      # Adresse du serveur MySQL
-        port=3306,             # Port par défaut
-        user=username,
-        passwd=password,
-        db=db_name
+        host="localhost",
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
-
-    # Création du curseur et exécution de la requête
-    # Utilisation de %s comme paramètre pour éviter les injections SQL
+    name_search = sys.argv[4]
     cursor = db.cursor()
-    cursor.execute(
-        "SELECT * FROM states WHERE name = %s ORDER BY id ASC",
-        (search_name,)
-    )
-    results = cursor.fetchall()
-
-    # Affichage des résultats
-    for row in results:
+    query = "SELECT * FROM states WHERE name = %s ORDER BY id;"
+    cursor.execute(query, (name_search,))
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
-
-    # Fermeture des ressources
     cursor.close()
     db.close()
