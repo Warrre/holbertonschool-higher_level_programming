@@ -3,8 +3,6 @@
 1-filter_states
 that lists all states from the
 database hbtn_0e_0_usa
-where name starts with 'n'
-and is ordered by id (ascending)
 """
 import MySQLdb
 import sys
