@@ -1,13 +1,9 @@
 #!/usr/bin/python3
 """
 Script qui liste tous les états d'une base de données.
-
-Ce module se connecte à une base de données MySQL et récupère tous les états
-enregistrés, en les triant par ID.
 """
 import MySQLdb
 import sys
-
 
 if __name__ == "__main__":
     # Récupération des arguments de la ligne de commande
@@ -35,4 +31,3 @@ if __name__ == "__main__":
 
     # Fermeture des ressources
     cursor.close()
-    
