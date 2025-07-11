@@ -1,7 +1,6 @@
 #!/usr/bin/node
-
 const arg = process.argv[2];
-const convArg = Number(arg);
+const convArg = parseInt(arg);
 if (isNaN(convArg)) {
   console.log('Missing number of occurrences');
 } else {
