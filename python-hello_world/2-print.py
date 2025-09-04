@@ -1,2 +1,2 @@
 #!/usr/bin/env python3
-print('"rogramming is like building a multilingual puzzle')
+print('"Programming is like building a multilingual puzzle')
