@@ -1,0 +1,92 @@
+>>> add_integer = __import__("0-add_integer").add_integer
+
+>>> add_integer(2, 3)
+5
+
+>>> add_integer(100)
+198
+
+>>> add_integer(2.5, 2.5)
+4
+
+>>> add_integer(-5, 2)
+-3
+
+>>> add_integer(-5, -5)
+-10
+
+>>> add_integer("2", 3)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(3, "4")
+Traceback (most recent call last):
+TypeError: b must be an integer
+
+>>> add_integer("2", 3.5)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(3.5, "4")
+Traceback (most recent call last):
+TypeError: b must be an integer
+
+>>> add_integer("2", "3")
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(None, 3)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(3, None)
+Traceback (most recent call last):
+TypeError: b must be an integer
+
+>>> add_integer(10**6, 10**6)
+2000000
+
+>>> add_integer(-10**6, -10**6)
+-2000000
+
+>>> add_integer(10**100, 1)
+10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+
+>>> add_integer(3.9999999, 0.0000001)
+3
+
+>>> add_integer(1e10, 1e10)
+20000000000
+
+>>> try:
+...     add_integer(float('inf'), 2)
+... except Exception as e:
+...     print(e)
+cannot convert float infinity to integer
+
+>>> try:
+...     add_integer(float('nan'), 2)
+... except Exception as e:
+...     print(e)
+cannot convert float NaN to integer
+
+>>> add_integer(1.9, 2.1)
+3
+
+>>> add_integer(True, False)
+1
+
+>>> add_integer(False, True)
+1
+
+>>> try:
+...     add_integer([1, 2, 3], 4)
+... except Exception as e:
+...     print(e)
+a must be an integer
+
+>>> try:
+...     add_integer(4, {'key': 'value'})
+... except Exception as e:
+...     print(e)
+b must be an integer
