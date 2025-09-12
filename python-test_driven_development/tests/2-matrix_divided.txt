@@ -1,0 +1,108 @@
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+>>> matrix = [
+...     [1, 2, 3],
+...     [4, 5, 6]
+... ]
+>>> matrix_divided(matrix, 3)
+[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+>>> matrix_divided([[2, 4], [6, 8]], 2)
+[[1.0, 2.0], [3.0, 4.0]]
+
+>>> matrix_divided([[1.5, 2.5], [3.5, 4.5]], 0.5)
+[[3.0, 5.0], [7.0, 9.0]]
+
+>>> matrix_divided([[1, 2]], 0)
+Traceback (most recent call last):
+ZeroDivisionError: division by zero
+
+>>> matrix_divided("not a matrix", 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[1, 2], [3, "a"]], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[1, 2], [3, 4, 5]], 2)
+Traceback (most recent call last):
+TypeError: Each row of the matrix must have the same size
+
+>>> matrix_divided([[1, 2], [3, 4]], "a")
+Traceback (most recent call last):
+TypeError: div must be a number
+
+>>> matrix_divided([], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[]], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[1, 2], None], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[1, 2], [3, [4]]], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[1, 2], [3, float('nan')]], 2)
+[[0.5, 1.0], [1.5, nan]]
+
+>>> matrix_divided([[1, 2], [3, 4]], None)
+Traceback (most recent call last):
+TypeError: div must be a number
+
+>>> matrix_divided([[1, 2], [3, 4]], float('nan'))
+[[nan, nan], [nan, nan]]
+
+>>> matrix_divided([[1, 2], [3, 4]], float('inf'))
+[[0.0, 0.0], [0.0, 0.0]]
+
+>>> matrix_divided([[1, 2], [3, 4]], [2])
+Traceback (most recent call last):
+TypeError: div must be a number
+
+>>> matrix_divided([[1000000, 2000000], [3000000, 4000000]], 1000000)
+[[1.0, 2.0], [3.0, 4.0]]
+
+>>> matrix_divided([[0.001, 0.002], [0.003, 0.004]], 0.001)
+[[1.0, 2.0], [3.0, 4.0]]
+
+>>> matrix_divided([[float('inf'), 2], [3, 4]], 2)
+[[inf, 1.0], [1.5, 2.0]]
+
+>>> matrix_divided([[1], [2], [3]], 2)
+[[0.5], [1.0], [1.5]]
+
+>>> matrix_divided([[0, 0], [0, 0]], 5)
+[[0.0, 0.0], [0.0, 0.0]]
+
+>>> matrix_divided([[0, 1], [1, 0]], 2)
+[[0.0, 0.5], [0.5, 0.0]]
+
+>>> matrix_divided([[1, 2], [3, 4]])
+Traceback (most recent call last):
+TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+>>> matrix_divided((3, 6, 9), 3)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([["1"], ["2", "3"], ["5", "6", "7"]], 10)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[-1, 3.1, 0], [78, -103.7, 54]], 9.2)
+[[-0.11, 0.34, 0.0], [8.48, -11.27, 5.87]]
+
+>>> matrix_divided([[2.1, 5.8], [], [10, -3]], 8)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[1, -1], (2, -2), [3, -3]], 1)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats

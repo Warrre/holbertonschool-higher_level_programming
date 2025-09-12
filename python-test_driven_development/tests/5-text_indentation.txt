@@ -1,0 +1,89 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+>>> text_indentation(123)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation(123.456)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation(float("inf"))
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation(float("NaN"))
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation((1, 2, 3))
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation([1, 2, 3])
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation(None)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+
+>>> text_indentation()
+Traceback (most recent call last):
+TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+>>> text_indentation("Hello.                My name is:    The Rock")
+Hello.
+<BLANKLINE>
+My name is:
+<BLANKLINE>
+The Rock
+
+
+>>> text_indentation("   Nice to meet you.    My   name   is   M.   Smith")
+Nice to meet you.
+<BLANKLINE>
+My   name   is   M.
+<BLANKLINE>
+Smith
+
+
+>>> text_indentation("     Holberton.       ")
+Holberton.
+<BLANKLINE>
+
+
+>>> text_indentation("     ")
+
+
+>>> text_indentation("")
+
+
+>>> text_indentation("Holberton ")
+Holberton
+
+
+>>> text_indentation("Holberton: !")
+Holberton:
+<BLANKLINE>
+!
+
+
+>>> text_indentation("   Holberton!... hello.\n   world!   ")
+Holberton!.
+<BLANKLINE>
+.
+<BLANKLINE>
+.
+<BLANKLINE>
+hello.
+<BLANKLINE>
+<BLANKLINE>
+world!
