@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Script that adds the State object 'Louisiana' to the database hbtn_0e_6_usa
+Script that changes the name of a State object with id=2 to 'New Mexico'
+in the database hbtn_0e_6_usa.
 """
 from sys import argv
 from model_state import Base, State
@@ -15,11 +16,11 @@ if __name__ == "__main__":
 
     Session = sessionmaker(bind=engine)
     session = Session()
+    state = session.query(State).filter(State.id == 2).first()
 
-    new_state = State(name="Louisiana")
-    session.add(new_state)
-    session.commit()
-    print(new_state.id)
+    if state:
+        state.name = "New Mexico"
+        session.commit()
 
     session.close()
 
