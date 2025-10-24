@@ -15,14 +15,6 @@ if __name__ == "__main__":
         passwd=argv[2],
         db=argv[3]
     )
-<<<<<<< HEAD
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM states \
-                    WHERE CONVERT (`name` USING Latin1) \
-                    COLLATE Latin1_General_CS \
-                    LIKE 'N%' ORDER BY `id` ASC")
-    rows = cursor.fetchall()
-=======
 
     cur = db.cursor()
 
@@ -30,7 +22,6 @@ if __name__ == "__main__":
         "SELECT * FROM states WHERE BINARY name LIKE 'N%' ORDER BY id ASC")
 
     rows = cur.fetchall()
->>>>>>> 81e32a4ae05c85348b2bc3d1fb9671c67fda66d2
 
     for row in rows:
         print(row)
