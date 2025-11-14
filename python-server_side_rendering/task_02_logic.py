@@ -2,7 +2,9 @@ import json
 import os
 from flask import Flask, render_template
 
-app = Flask(__name__)
+# Ensure Flask knows the correct templates folder even when module is imported
+_BASE_DIR = os.path.dirname(__file__)
+app = Flask(__name__, template_folder=os.path.join(_BASE_DIR, 'templates'))
 
 
 @app.route('/items')

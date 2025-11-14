@@ -4,7 +4,9 @@ import os
 import sqlite3
 from flask import Flask, render_template, request
 
-app = Flask(__name__)
+# Ensure Flask finds templates when imported by external checkers
+_BASE_DIR = os.path.dirname(__file__)
+app = Flask(__name__, template_folder=os.path.join(_BASE_DIR, 'templates'))
 
 
 def read_json_products(path):
